@@ -1,0 +1,5 @@
+export const SHOW_LOADING = 'SHOW_LOADING'
+export const HIDE_LOADING = 'HIDE_LOADING'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
+export const USER_INFO = 'USER_INFO'

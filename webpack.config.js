@@ -3,11 +3,12 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const url = require('url')
 const publicPath = ''
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = (options = {}) => ({
   entry: {
     vendor: './src/vendor',
-    index: './src/main.js'
+    index: './src/index.js'
   },
   output: {
     path: resolve(__dirname, 'dist'),
@@ -18,7 +19,10 @@ module.exports = (options = {}) => ({
   module: {
     rules: [{
         test: /\.vue$/,
-        use: ['vue-loader']
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true
+        }
       },
       {
         test: /\.js$/,
@@ -30,11 +34,16 @@ module.exports = (options = {}) => ({
         use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
+        test: /\.less$/,
+        use: ['style-loader', 'css-loader', 'less-loader'],
+        exclude: /node_modules/
+      },
+      {
         test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
         use: [{
           loader: 'url-loader',
           options: {
-            limit: 10000
+            limit: 1024
           }
         }]
       }
@@ -46,11 +55,14 @@ module.exports = (options = {}) => ({
     }),
     new HtmlWebpackPlugin({
       template: 'src/index.html'
-    })
+    }),
+    new ExtractTextPlugin("style.css")
   ],
   resolve: {
     alias: {
-      '~': resolve(__dirname, 'src')
+      '~': resolve(__dirname, 'src'),
+      'assets': resolve(__dirname, 'src/assets'), 
+      'style': resolve(__dirname, 'src/style'), 
     }
   },
   devServer: {
