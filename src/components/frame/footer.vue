@@ -1,7 +1,17 @@
 <template>
-  <span> 业务管理系统 © 2017</span>
+  <span> {{copyright}}</span>
 </template>
-<<style>
+<script>
+import config from '~/utils/config'
+export default {
+  data() {
+    return {
+      copyright: config.copyright
+    };
+  },
+};
+</script>
+<style>
 .el-footer{
     height: 48px;
     line-height: 48px;
@@ -13,5 +23,9 @@
     box-shadow: 4px 4px 40px 0 rgba(0,0,0,.05);
     width: 100%;
 }
+.footer {
+  border-top: solid 1px #e6e6e6;
+}
+
 </style>
 

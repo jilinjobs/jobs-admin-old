@@ -1,12 +1,12 @@
 <template>
-  <Login id="root"></Login>
+  <Layout id="root"></Layout>
 </template>
 
 <script>
-import Login from '~/components/frame/login.vue'
+import Layout from '~/components/frame/login-layout.vue'
 export default {
   components: {
-    Login
+    Layout
   }
 }
 </script>

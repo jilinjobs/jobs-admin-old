@@ -5,9 +5,9 @@
           <div class="top">
             <div class="header">
               <img alt="" class="logo" src="~/assets/logo.png" />
-              <span class="title">GAF Framework</span>
+              <span class="title">{{productName}}</span>
             </div>
-            <p class="desc">GAF通用业务管理平台</p>
+            <p class="desc">{{description}}</p>
           </div>
 		    	<el-form class="main" :model="loginForm" :rules="rules" ref="loginForm">
 						<el-form-item prop="username">
@@ -22,20 +22,26 @@
 					</el-form>
 	  		</div>
 	  	</transition>
-			<div class="footer">
-				<div class="copyright">copyright</div>
-			</div>
+			<el-footer class="footer" height="layout.footerHeight">
+				<my-footer></my-footer>
+			</el-footer>
   	</div>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
+import config from '~/utils/config'
+import MyFooter from "./footer.vue";
+const {productName, description, copyright, layout} = config
 
 const { mapState, mapActions } = createNamespacedHelpers('login')
 
 // import {login, getAdminInfo} from '@/api/getData'
 // import {mapActions, mapState} from 'vuex'
 export default {
+  components: {
+    MyFooter
+  },
   data() {
     return {
       loginForm: {
@@ -46,7 +52,11 @@ export default {
         username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
         password: [{ required: true, message: "请输入密码", trigger: "blur" }]
       },
-      showLogin: false
+      showLogin: false,
+      productName, 
+      description, 
+      copyright,
+      layout,
     };
   },
   mounted() {
@@ -73,7 +83,8 @@ export default {
       		if (res.errcode === 0) {
       			this.$message({
                           type: 'success',
-                          message: '登录成功'
+                          message: '登录成功',
+                          duration: 1000
                       });
       			this.$router.push(this.$route.query.redirect||'/')
       		}else{
@@ -163,7 +174,8 @@ export default {
   position: absolute;
   width: 100%;
 	bottom: 0;
-	text-align: center;
+  text-align: center;
+  height: 48px;
 }
 
 .copyright {

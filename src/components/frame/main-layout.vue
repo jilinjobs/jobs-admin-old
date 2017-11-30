@@ -2,17 +2,17 @@
   <el-container class="layout">
   <el-aside :width="asideWidth" class="sider">
     <el-container>
-      <el-header class="logo" height="64px" >
+      <el-header class="logo" :height="layout.headerHeight" >
         <router-link to="/">
           <img src="~/assets/logo.png" alt="logo" style="height:32px;width:32px;" />
         </router-link>
-        <h1>GAF Framework</h1>
+        <h1>{{name}}</h1>
       </el-header>    
       <el-main><my-menu theme="light" :is-collapse="menuCollapse"></my-menu></el-main>
     </el-container>
   </el-aside>
-  <el-container class="content">
-    <el-header class="header" height="64px">
+  <el-container>
+    <el-header class="header" :height="layout.headerHeight">
       <i class="iconfont" :class="{'icon-unfold': menuCollapse, 'icon-fold': !menuCollapse,}" @click="toggleMenu"></i>
       <el-dropdown class="right">
         <span class="el-dropdown-link">
@@ -27,8 +27,8 @@
       </el-dropdown>            
     </el-header>
     <el-main>
-      <el-container>
-        <el-header height="24px">
+      <el-container class="content">
+        <el-header :height="layout.breadHeight">
           <my-bread></my-bread>
         </el-header>
         <el-main>
@@ -38,27 +38,29 @@
         </el-main>
       </el-container>
     </el-main>
-    <el-footer class="footer" height="48px"><my-footer></my-footer></el-footer>
+    <el-footer class="footer" height="layout.footerHeight"><my-footer></my-footer></el-footer>
   </el-container>
 </el-container>
 </template>
 <script>
 import MyHeader from "./header.vue";
 import MyFooter from "./footer.vue";
-import MyMain from "./main.vue";
-import MyMenu from "./menu.vue";
+import MyMenu from "./menu-pane.vue";
 import MyBread from "./bread.vue";
+import config from '~/utils/config'
+const {layout} = config
 export default {
   components: {
     MyHeader,
     MyFooter,
-    MyMain,
     MyMenu,
     MyBread,
   },
   data() {
     return {
-      menuCollapse: false
+      menuCollapse: false,
+      name: config.shortName,
+      layout
     };
   },
   methods: {
@@ -68,11 +70,12 @@ export default {
   },
   computed: {
     asideWidth() {
-      return this.menuCollapse ? "64px" : "256px";
+      return this.menuCollapse ? layout.asideCollapseWidth : layout.asideExpandWidth;
     }
   }
 };
 </script>
+
 
 <style scoped lang="less">
 .layout {
@@ -96,9 +99,6 @@ export default {
     .name {
       color: #fff;
     }
-  }
-  .footer {
-    border-top: solid 1px #e6e6e6;
   }
   .sider {
     background: #20a0ff; /*#545c64;*/
@@ -135,6 +135,9 @@ export default {
   }
   .right {
     float: right;
+  }
+  .content {
+    height: 100%;
   }
 }
 .action-menu{
