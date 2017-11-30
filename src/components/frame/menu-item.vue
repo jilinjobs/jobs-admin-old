@@ -1,14 +1,14 @@
 <template>
     <el-submenu :index="index" v-if="hasChildren">
       <template slot="title">
-        <i :class="'el-icon-'+options.icon" v-if="hasIcon"></i>
+        <i :class="iconCls" v-if="hasIcon"></i>
         <span slot="title">{{title}}</span>
       </template>
       <gaf-menu-item v-for="(item, idx) in children" :key="idx" :index="index+'-'+idx" 
         :title="item.title" :children="item.children" :options="item.options">
       </gaf-menu-item>
     </el-submenu>
-    <el-menu-item :index="index" @click="menuClick" v-else><i :class="'el-icon-'+options.icon"></i>
+    <el-menu-item :index="index" @click="menuClick" v-else><i :class="iconCls"></i>
       <span slot="title">{{title}}</span>
     </el-menu-item>
 </template>
@@ -41,6 +41,12 @@ export default {
     hasIcon(){
       return this.options.icon && this.options.icon.length > 0
     },
+    iconCls(){
+      if(this.options.icon && !(this.options.icon.indexOf('el-') == 0))
+        return 'gaf-icons gaf-icon-' + this.options.icon  
+      else
+        return this.options.icon
+    }
   }
 }
 </script>

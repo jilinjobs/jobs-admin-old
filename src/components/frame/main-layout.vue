@@ -4,7 +4,7 @@
     <el-container>
       <el-header class="logo" :height="layout.headerHeight" >
         <router-link to="/">
-          <img src="~/assets/logo.png" alt="logo" style="height:32px;width:32px;" />
+          <img src="~/assets/logo1.svg" alt="logo" style="height:32px;width:32px;" />
         </router-link>
         <h1>{{name}}</h1>
       </el-header>    
@@ -13,16 +13,16 @@
   </el-aside>
   <el-container>
     <el-header class="header" :height="layout.headerHeight">
-      <i class="iconfont" :class="{'icon-unfold': menuCollapse, 'icon-fold': !menuCollapse,}" @click="toggleMenu"></i>
+      <i class="gaf-icons" :class="{'gaf-icon-unfold': menuCollapse, 'gaf-icon-fold': !menuCollapse,}" @click="toggleMenu"></i>
       <el-dropdown class="right">
         <span class="el-dropdown-link">
-          <i class="iconfont icon-avatar"></i>
+          <i class="gaf-icons gaf-icon-avatar"></i>
           <span class="name">管理員</span>
         </span>
         <el-dropdown-menu class="action-menu" slot="dropdown">
-          <el-dropdown-item><i class="iconfont icon-user"></i><span>个人中心</span></el-dropdown-item>
-          <el-dropdown-item><i class="iconfont icon-setting"></i>设置</el-dropdown-item>
-          <el-dropdown-item divided><i class="iconfont icon-quit"></i>退出</el-dropdown-item>
+          <el-dropdown-item><i class="gaf-icons gaf-icon-user"></i><span>个人中心</span></el-dropdown-item>
+          <el-dropdown-item><i class="gaf-icons gaf-icon-setting"></i>设置</el-dropdown-item>
+          <el-dropdown-item divided><i class="gaf-icons gaf-icon-quit"></i>退出</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>            
     </el-header>
@@ -88,7 +88,7 @@ export default {
     line-height: 64px;
     background: #20a0ff;
     color: #fff;
-    .icon-avatar{
+    .gaf-icon-avatar{
       margin-right: 4px;
       color: rgba(255, 255, 255, 0.8);
       font-size: 20px;
@@ -141,7 +141,7 @@ export default {
   }
 }
 .action-menu{
-  .iconfont{
+  .gaf-icons{
     margin-right: 4px;
   }
 }

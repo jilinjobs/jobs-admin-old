@@ -27,7 +27,7 @@ const datas = [
   },
   {
     title: '导航2',
-    icon: 'menu',
+    icon: 'setting',
     children: [
       {
         title: '页面1',
